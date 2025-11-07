@@ -1,0 +1,34 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+double redondear(double R, int n);
+void leerDatos(double &R, int &n);
+void mostrarResultado(double R, int n, double resultado);
+
+int main() {
+    double R, resultado;
+    int n;
+
+    leerDatos(R, n);
+    resultado = redondear(R, n);
+    mostrarResultado(R, n, resultado);
+
+    return 0;
+}
+
+void leerDatos(double &R, int &n) {
+    cout << "Ingrese un numero real: ";
+    cin >> R;
+    cout << "Ingrese el numero de decimales: ";
+    cin >> n;
+}
+
+double redondear(double R, int n) {
+    double factor = pow(10, n);
+    return round(R * factor) / factor;
+}
+
+void mostrarResultado(double R, int n, double resultado) {
+    cout << R << " redondeado a " << n << " decimales es: " << resultado << endl;
+}
