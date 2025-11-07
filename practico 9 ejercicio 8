@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cmath>
+#include <complex>
+using namespace std;
+
+void leerCoeficientes(double &a, double &b, double &c);
+void resolverCuadratica(double a, double b, double c);
+
+int main() {
+    double a, b, c;
+
+    leerCoeficientes(a, b, c);
+    resolverCuadratica(a, b, c);
+
+    return 0;
+}
+
+void leerCoeficientes(double &a, double &b, double &c) {
+    cout << "Ingrese el coeficiente a: ";
+    cin >> a;
+    cout << "Ingrese el coeficiente b: ";
+    cin >> b;
+    cout << "Ingrese el coeficiente c: ";
+    cin >> c;
+}
+
+void resolverCuadratica(double a, double b, double c) {
+    if (a == 0) {
+        if (b != 0) cout << "Ecuacion lineal, x = " << -c / b << endl;
+        else cout << "Ecuacion invalida." << endl;
+        return;
+    }
+
+    double discriminante = b * b - 4 * a * c;
+
+    if (discriminante > 0) {
+        double x1 = (-b + sqrt(discriminante)) / (2 * a);
+        double x2 = (-b - sqrt(discriminante)) / (2 * a);
+        cout << "Raices reales y distintas: x1 = " << x1 << ", x2 = " << x2 << endl;
+    } else if (discriminante == 0) {
+        double x = -b / (2 * a);
+        cout << "Raiz doble: x = " << x << endl;
+    } else {
+        complex<double> x1 = complex<double>(-b, sqrt(-discriminante)) / (2.0 * a);
+        complex<double> x2 = complex<double>(-b, -sqrt(-discriminante)) / (2.0 * a);
+        cout << "Raices complejas: x1 = " << x1 << ", x2 = " << x2 << endl;
+    }
+}
