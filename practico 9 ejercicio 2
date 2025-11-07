@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+int FAC(int n);
+void leerDato(int &n);
+void mostrarResultado(int n, int resultado);
+
+int main() {
+    int n, resultado;
+
+    leerDato(n);
+    resultado = FAC(n);
+    mostrarResultado(n, resultado);
+
+    return 0;
+}
+
+void leerDato(int &n) {
+    cout << "Ingrese un numero entero: ";
+    cin >> n;
+}
+
+int FAC(int n) {
+    int f = 1;
+    for (int i = 1; i <= n; i++) {
+        f *= i;
+    }
+    return f;
+}
+
+void mostrarResultado(int n, int resultado) {
+    cout << "El factorial de " << n << " es: " << resultado << endl;
+}
