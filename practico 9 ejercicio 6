@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void leerFecha(int &dia, int &mes, int &anio);
+string nombreMes(int mes);
+void LITERAL(int dia, int mes, int anio);
+void mostrarResultado(string fechaLiteral);
+
+int main() {
+    int dia, mes, anio;
+
+    leerFecha(dia, mes, anio);
+    LITERAL(dia, mes, anio);
+
+    return 0;
+}
+
+void leerFecha(int &dia, int &mes, int &anio) {
+    cout << "Ingrese el dia: ";
+    cin >> dia;
+    cout << "Ingrese el mes: ";
+    cin >> mes;
+    cout << "Ingrese el anio (dos o cuatro cifras): ";
+    cin >> anio;
+}
+
+string nombreMes(int mes) {
+    string meses[] = {"", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    if (mes >= 1 && mes <= 12)
+        return meses[mes];
+    else
+        return "Mes invalido";
+}
+
+void LITERAL(int dia, int mes, int anio) {
+    if (anio < 100) anio += 1900; // convierte 2 cifras en año completo (opcional)
+    string mesNombre = nombreMes(mes);
+    string fecha = to_string(dia) + " de " + mesNombre + " de " + to_string(anio);
+    mostrarResultado(fecha);
+}
+
+void mostrarResultado(string fechaLiteral) {
+    cout << "La fecha en literal es: " << fechaLiteral << endl;
+}
+✅ Resumen del programa:
