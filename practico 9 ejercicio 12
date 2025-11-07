@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+bool esBisiesto(int anio);
+bool validarFecha(int dia, int mes, int anio);
+void leerFecha(int &dia, int &mes, int &anio);
+void mostrarResultado(int dia, int mes, int anio, bool esValida);
+
+int main() {
+    int dia, mes, anio;
+    leerFecha(dia, mes, anio);
+    bool esValida = validarFecha(dia, mes, anio);
+    mostrarResultado(dia, mes, anio, esValida);
+    return 0;
+}
+
+void leerFecha(int &dia, int &mes, int &anio) {
+    cout << "Ingrese el dia: ";
+    cin >> dia;
+    cout << "Ingrese el mes: ";
+    cin >> mes;
+    cout << "Ingrese el anio: ";
+    cin >> anio;
+}
+
+bool esBisiesto(int anio) {
+    return (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
+}
+
+bool validarFecha(int dia, int mes, int anio) {
+    if (anio < 1 || mes < 1 || mes > 12 || dia < 1) return false;
+
+    int diasMes[] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+    if (mes == 2 && esBisiesto(anio)) diasMes[2] = 29;
+
+    if (dia > diasMes[mes]) return false;
+    return true;
+}
+
+void mostrarResultado(int dia, int mes, int anio, bool esValida) {
+    if (esValida)
+        cout << "La fecha " << dia << "/" << mes << "/" << anio << " es valida." << endl;
+    else
+        cout << "La fecha " << dia << "/" << mes << "/" << anio << " es invalida." << endl;
+}
