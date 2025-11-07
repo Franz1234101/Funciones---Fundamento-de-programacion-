@@ -1,0 +1,50 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int FAC(int n);
+double calcularSerie(int x, int n);
+void leerDatos(int &x, int &n);
+void mostrarResultado(int x, int n, double resultado);
+
+int main() {
+    int x, n;
+    double resultado;
+
+    leerDatos(x, n);
+    resultado = calcularSerie(x, n);
+    mostrarResultado(x, n, resultado);
+
+    return 0;
+}
+
+void leerDatos(int &x, int &n) {
+    cout << "Ingrese el valor de X: ";
+    cin >> x;
+    cout << "Ingrese el valor de N (impar): ";
+    cin >> n;
+}
+
+int FAC(int n) {
+    int f = 1;
+    for (int i = 1; i <= n; i++) {
+        f *= i;
+    }
+    return f;
+}
+
+double calcularSerie(int x, int n) {
+    double suma = 0;
+    int signo = 1;
+
+    for (int i = 1; i <= n; i += 2) {
+        suma += signo * (pow(x, i) / FAC(i));
+        signo *= -1;  // alterna el signo (+, -)
+    }
+
+    return suma;
+}
+
+void mostrarResultado(int x, int n, double resultado) {
+    cout << "La suma de la serie para X=" << x << " y N=" << n << " es: " << resultado << endl;
+}
