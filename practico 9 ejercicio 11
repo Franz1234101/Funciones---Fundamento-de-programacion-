@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+string convertirATexto(int n);
+string leerNumero();
+void convertirALiteral(string numeroStr);
+
+int main() {
+    string numeroStr = leerNumero();
+    convertirALiteral(numeroStr);
+    return 0;
+}
+
+string leerNumero() {
+    string num;
+    cout << "Ingrese un numero real (max 4 cifras enteras y 2 decimales): ";
+    cin >> num;
+    return num;
+}
+
+void convertirALiteral(string numeroStr) {
+    size_t punto = numeroStr.find('.');
+    int parteEntera = 0, parteDecimal = 0;
+
+    if (punto != string::npos) {
+        parteEntera = stoi(numeroStr.substr(0, punto));
+        string dec = numeroStr.substr(punto + 1);
+        if (dec.length() == 1) dec += "0"; // agregar cero si solo hay un decimal
+        parteDecimal = stoi(dec.substr(0, 2));
+    } else {
+        parteEntera = stoi(numeroStr);
+    }
+
+    string unidades[] = {"", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"};
+    string decenas[] = {"", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"};
+    string especiales[] = {"once", "doce", "trece", "catorce", "quince", "dieciseis", "diecisiete", "dieciocho", "diecinueve"};
+
+    string literal = "";
+
+    if (parteEntera >= 1000) {
+        int mil = parteEntera / 1000;
+        literal += unidades[mil] + " mil ";
+        parteEntera %= 1000;
+    }
+    if (parteEntera >= 100) {
+        int cien = parteEntera / 100;
+        literal += (cien == 1 ? "cien " : unidades[cien] + "cientos ");
+        parteEntera %= 100;
+    }
+    if (parteEntera >= 11 && parteEntera <= 19) {
+        literal += especiales[parteEntera - 11] + " ";
+    } else if (parteEntera == 10 || parteEntera >= 20) {
+        int dec = parteEntera / 10;
+        int uni = parteEntera % 10;
+        literal += decenas[dec];
+        if (uni != 0) literal += " y " + unidades[uni];
+        literal += " ";
+    } else if (parteEntera > 0 && parteEntera <= 9) {
+        literal += unidades[parteEntera] + " ";
+    }
+
+    cout << literal << (parteDecimal < 10 ? "0" : "") << parteDecimal << "/100 bolivianos" << endl;
+}
